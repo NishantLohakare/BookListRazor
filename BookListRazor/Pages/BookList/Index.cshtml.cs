@@ -17,10 +17,24 @@ namespace BookListRazor
         {
             _db = db;
         }
-        public IEnumerable<Book> Book { get; set; }
+        public IEnumerable<Book> Books { get; set; }
         public async Task OnGet()
         {
-            Book = await _db.Book.ToListAsync();
+            Books = await _db.Book.ToListAsync();
+        }
+
+        public async Task<IActionResult> OnPostDelete(int id)
+        {
+            var book = await _db.Book.FindAsync(id);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+            _db.Book.Remove(book);
+            await _db.SaveChangesAsync();
+
+            return RedirectToPage("Index");
         }
     }
 }
