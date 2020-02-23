@@ -6,11 +6,14 @@
 
 <br />
 <div class="container row p-0 m-0">
-    <div class="col-9">
+    <div class="col-6">
         <h2 class="text-info">Book List</h2>
     </div>
     <div class="col-3">
         <a asp-page="Create" class="btn btn-info form-control text-white">Create New Book</a>
+    </div>
+    <div class="col-3">
+        <a asp-page="Upsert" class="btn btn-info form-control text-white">Add(Upsert) New Book</a>
     </div>
 
     <div class="col-12 border p-3 mt-3">
@@ -28,24 +31,25 @@
                         <th>
                             <label asp-for="Books.FirstOrDefault().ISBN"></label>
                         </th>
+                        <th>Action</th>
                     </tr>
                     @foreach (var item in Model.Books)
                     {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(m => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => item.Author)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => item.ISBN)
-                    </td>
-                    <td>
-                        <button asp-page-handler="Delete" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger btn-sm">Delete</button>
-                        <a asp-page="Edit" asp-route-id="@item.Id" class="btn btn-success btn-sm text-white">Edit</a>
-                    </td>
-                </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Author)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.ISBN)
+                            </td>
+                            <td>
+                                <button asp-page-handler="Delete" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger btn-sm">Delete</button>
+                                <a asp-page="Edit" asp-route-id="@item.Id" class="btn btn-success btn-sm text-white">Edit</a>
+                            </td>
+                        </tr>
                     }
                 </table>
             }
@@ -56,7 +60,7 @@
         </form>
     </div>
 
-    <div class="col-12" style="text-align:center" >
+    <div class="col-12" style="text-align:center">
         <br />
         <span class="h3 text-info">OR</span>
         <br /><br />
@@ -68,7 +72,7 @@
                     <th>Name</th>
                     <th>Author</th>
                     <th>ISBN</th>
-                    <th></th>
+                    <th style="text-align:center">Action</th>
                 </tr>
             </thead>
         </table>
